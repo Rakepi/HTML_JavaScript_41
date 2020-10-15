@@ -2,8 +2,12 @@
 
 /*Example of CSS Syntax and Rules*/
 
-h1{
-    color: aquamarine;
-    font-family: cursive;
-    font-size: 13px;
+p{
+    font-size: 20px;
+    color: rgb(90, 0, 0);
+    font-weight: 200;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
