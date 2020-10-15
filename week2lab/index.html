@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>week2 css-lab</title>
+        <!--Example of style link placement-->
+        <link rel="stylesheet" href="style.css">
+        <!--Example of in doc style sheet-->
+        <style>
+            /*CSS goes here*/
+            h1{color: orange;} 
+            /*over-rides external style sheet rules*/
+            /*Example of ID and Class and block lvl elements*/
+            #newheader{
+                color: palegreen;
+                width: 400px;
+                background-color: orchid;
+                margin: auto;
+                border: 5px dashed blueviolet;
+                margin-top: 50px;
+                padding:  25px 0 40px 0;
+            }
+
+            .newheader{
+                color:  orangered;
+            }
+        </style>
+    </head>
+    <body>
+        <!--Overrides all other style rules vvv-->
+        <h1 style="color: #72e9b7;">Welcome to week 2 lab.</h1>
+        <!--Follows external rules of linked CSS style sheet-->
+        <h1>Welcome to week 2 lab.</h1>
+        <!--Example of ID and Class-->
+        <h1 id="newheader">Welcome to week 2 lab.</h1>
+        <h1 class="newheader">Welcome to week 2 lab.</h1>
+        <h1>Welcome to week 2 lab.</h1>
+        <h1>Welcome to week 2 lab.</h1>
+
+        <a href="riddles.html">Link to riddle page</a>
+        
+    </body>
+</html>      
