@@ -1,0 +1,46 @@
+/*CSS goes here*/
+
+html ,body{
+    height: 100%;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif monospace;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+#container{
+    width: 1000px;
+    background-color: tomato;
+    padding: 10px;
+
+}
+
+header{
+    background-color: white;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+canvas{
+    background-color: white;
+    border: 1px solid black;
+    margin-bottom: 10px;
+
+}
+
+footer{
+    background-color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}

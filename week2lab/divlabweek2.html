@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div lab week 2</title>
+
+    <style>
+        html, body{
+            margin: 0px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            background-image: url("images/background.png");
+            font-family: Arial, Helvetica, sans-serif;
+
+
+        }
+        #container{
+            width: 1000px;
+            height: 100%;
+            background-color: greenyellow;
+            margin-top: 0px;
+        }
+        #header{
+            height: 100px;
+            background-color: hotpink;
+            text-align: center;
+            line-height: 100px;
+        }
+        #nav{
+            background-color: grey;
+            width: 1000px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        #content{
+            background-color: #4b0082;
+            display: flex;
+
+        }
+        #footer{
+            background-color: khaki;
+            line-height: 100px;
+            text-align: center;
+        }
+        
+        h1{
+            margin: 0px;
+        }
+        .content-left{
+            width: 500px;
+            height: 500px;
+            background-color: blueviolet;
+        }
+        .content-right{
+            width: 500px;
+            height: 500px;
+            background-color: purple;
+        }
+        .btn:link{
+            color: rosybrown;
+            background-color: saddlebrown;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+            margin: 10px 10px 10px 0px;
+        }
+
+        .btn:hover{
+            background-color: darkslateblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header"><h1>Welcome to week 2 div lab</h1></div>
+    
+    <div id="nav">
+        <!--this is my list of nav buttons-->
+        <a href="#" class="btn">Home</a>
+        
+        <a href="#" class="btn">Bio</a>
+        
+        <a href="#" class="btn">Games</a>
+        
+        <a href="#" class="btn">Contant</a>
+
+    </div>
+    <div id="content">
+        <div class="content-left">
+            <p>Egestas maecenas pharetra convallis posuere morbi leo urna molestie at. Velit aliquet sagittis id consectetur purus ut faucibus. Viverra justo nec ultrices dui sapien eget mi proin sed. Quam elementum pulvinar etiam non quam lacus suspendisse. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Diam in arcu cursus euismod quis viverra nibh. Ornare suspendisse sed nisi lacus sed viverra. Eget gravida cum sociis natoque penatibus et magnis dis parturient. Quis eleifend quam adipiscing vitae proin sagittis. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida hendrerit.</p>
+
+        </div>
+        <div class="content-right">
+            <img src="images/Masthead_Kirby.17345b1513ac044897cfc243542899dce541e8dc.9afde10b.png" alt="Kirby" width="500px" height=" 500px">
+
+        </div>
+    </div>
+    <div id="footer">boop
+
+    </div>
+ </div>
+
+</body>
+</html>
