@@ -1,0 +1,45 @@
+html ,body{
+    height: 100%;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif monospace;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+#container{
+    width: 1000px;
+    background-image:("images/Boop.jpg");
+    padding: 10px;
+    
+
+}
+
+header{
+    background-color: lavender;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+canvas{
+    background-color: white;
+    border: 1px solid grey;
+    margin-bottom: 10px;
+
+}
+
+footer{
+    background-color: purple;
+    margin-bottom: 10px;
+    text-align: center;
+}
