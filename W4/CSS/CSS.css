@@ -11,7 +11,7 @@ body{
 
 #container{
     width: 1000px;
-    background-image:("images/Boop.jpg");
+    background-image:url("../images/Boop.jpg");
     padding: 10px;
     
 
