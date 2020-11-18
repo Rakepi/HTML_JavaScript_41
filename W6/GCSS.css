@@ -20,7 +20,7 @@ nav{
 canvas{
     border: 2px solid black;
     background-color: seashell;
-    
+    background-image: url(images/rock-paper-scissors-items.png);    
 }
 
 a:link, a:hover{
