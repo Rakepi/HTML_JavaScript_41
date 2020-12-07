@@ -1,0 +1,25 @@
+html,body{
+    display: flex;
+    justify-content: center;
+
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+
+canvas{
+    border: 2px solid black;
+    background-image: url(shapes.png);
+    
+}
+
+#container{
+    width: 800px;
+    border: 2px solid black;
+    padding: 12px;
+
+}
