@@ -2,11 +2,12 @@ var c = document.querySelector('canvas')
 var ctx = c.getContext('2d')
 var timer = requestAnimationFrame(main)
 var gravity = .3;
-//remember to play with gravity 
+ 
 var asteroids = new Array();
 var numAsteroids = 10;
 var gameOver = false;
 var score = 0;
+
 
 function randomRange(high, low){
     return Math.random() * (high - low) + low;
@@ -34,7 +35,6 @@ function Asteroids(){
 
 }
 
-//for loop creates all asteroids
 for(var i = 0; i<numAsteroids; i++){
     asteroids[i] = new Asteroids();
 }
@@ -120,16 +120,15 @@ function Playership(){
      
 }
 
-//this makes an instance of ship
+//instance of ship
 var ship = new Playership();
 
-//event listeners
+// listeners
 document.addEventListener("keydown", keypressdown);
 document.addEventListener("keyup", keypressup);
 
 //adding key functions
 function keypressdown(e){
-   // console.log("key pressed " + e.keyCode)
 
     if(e.keyCode === 38){
         ship.up = true
@@ -143,7 +142,6 @@ function keypressdown(e){
    
 }
 function keypressup(e){
-    //console.log("key pressed " + e.keyCode)
 
     if(e.keyCode === 38){
         ship.up = false
@@ -168,7 +166,7 @@ function main(){
     ctx.fillStyle ='white';
     ctx.fillText("Score: " + score.toString(), c.width - 150 , 30);
     ctx.restore();
-    //ship.vy += gravity;
+    
 
     //key presses move ship
     if(ship.up == true){
@@ -193,18 +191,12 @@ function main(){
 
         //loops asteroids
     for(var i = 0; i<asteroids.length; i++){
-        //collition math
+        //collition detection
         var dx = ship.x - asteroids[i].x;
         var dy = ship.y - asteroids[i].y;
         var dist = Math.sqrt((dx*dx)+(dy*dy));
 
-        //check for collition boundries
-       // if(dist < ship.h/2 + asteroids[i].radius){
-            //console.log("colliding with asteroid " + i);
-        //}
-
         if(detectCollision(dist,(ship.h + asteroids[i].radius))){
-           // console.log("colliding with asteroid " + i);
             gameOver = true;
             document.removeEventListener("keydown", keypressdown);
             document.removeEventListener("keyup", keypressup);
@@ -212,7 +204,7 @@ function main(){
 
 
 
-        //recycles asteroids
+        //recycling the asteroids
         if(asteroids[i].y > c.height + asteroids[i].radius){
             asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius)- c.height;
             asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius);
@@ -247,7 +239,7 @@ function detectCollision(distance, calcDistance){
 function scoreTimer(){
     if(gameOver == false){
         score++;
-        //using modulus divide score by 5. if remainder is 0 add asteroids
+        //using modulus divide score by 3, if remainder is 0 add asteroids
         if(score % 5 == 0){
             numAsteroids += 3;
             console.log(numAsteroids);

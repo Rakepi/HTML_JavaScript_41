@@ -1,9 +1,7 @@
+window.onload = function(){
 var c = document.querySelector('canvas')
 var ctx = c.getContext('2d')
 
-function draw(){
-    square();
-}
 
 function square(){
     ctx.fillStyle = 'purple'
@@ -11,5 +9,10 @@ function square(){
     ctx.lineWidth = 5
     ctx.fillRect()
     ctx.strokeRect()
+
+}
+function draw(){
+    square();
+}
 
 }
