@@ -1,0 +1,44 @@
+
+
+html ,body{
+    height: 100%;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+h1{
+    width: 950;
+    padding: 10px;
+    display: flex;
+    font-family: cursive;
+    justify-content: center;
+    background-color: dimgray;
+    border: solid 3px white;
+    
+}
+h2{
+    width: 950;
+    padding: 10px;
+    display: flex;
+    font-family: cursive;
+    justify-content: center;
+    background-color:dimgray;
+    
+}
+
+
+#container{
+    width: 970px;
+    background-color: rosybrown;
+    padding: 10px;
+    justify-content: center;
+ 
+}
+
+#navbar{
+    background-color: seashell;
+    text-align: center;
+    margin: auto;
+}
+

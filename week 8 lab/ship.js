@@ -9,11 +9,18 @@ var gameOver = true;
 var score = 0;
 var highScore = 0;
 var bgMain = new Image();
+var astSprite = new Image();
+var Sprite = new Image();
 
 bgMain.src = "images/Rocks.jpg";
+astSprite.src = "images/astSprite.png";
+astSprite.src = "images/Sprite.png";
 
 //event listener to triger main when img is loaded
 bgMain.onload = function(){
+    main();
+}
+astSprite.onload = function(){
     main();
 }
 
@@ -32,23 +39,14 @@ function Asteroids(){
     this.y = randomRange(0 + this.radius, c.width - this.radius)- c.height;
     this.vx = randomRange(-5,-10);
     this.vy = randomRange(10,5);
-    this.color = "white";
 
     this.draw = function(){
         ctx.save();
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.arc(this.x,this.y,this.radius, 0, 2*Math.PI, true);
-        ctx.closePath();
-        ctx.fill();
+        ctx.drawImage(astSprite, this.x - this.radius, this.y - this.radius, this.radius*2, this.radius*2)
         ctx.restore();
-
     }
 
 }
-
-//for loop creates all asteroids
-
 
 function Playership(){
     this.x = c.width/2;
@@ -63,8 +61,6 @@ function Playership(){
     this.flamelength = 30;
 
     this.draw = function(){
-
-
         ctx.save();
         ctx.translate(this.x, this.y);
         // draws flames
@@ -77,7 +73,6 @@ function Playership(){
             else{
                 this.flamelength = 30
             }
-
             ctx.beginPath();
             ctx.fillStyle = 'yellow';
             ctx.moveTo(0, this.flamelength);
@@ -97,10 +92,9 @@ function Playership(){
         ctx.lineTo (0,-10);
         ctx.closePath();
         ctx.fill();
-
         ctx.restore();
     }
-
+//bountries
     this.move = function(){
         this.x += this.vx;
         this.y += this.vy;
@@ -109,12 +103,12 @@ function Playership(){
             this.y = c.height - 10;
             this.vy = 0;
         }
-        //right boundry 
+        
         if(this.x > c.width - 10){
             this.x = c.width - 10
             this.vx = 0
         }
-        //left boundry
+
         if(this.x < 0 + 10){
             this.x = 0 + 10
             this.vx = 0
@@ -125,8 +119,6 @@ function Playership(){
             this.vy = 0;
         }
         
-
-    
     }
      
 }
@@ -138,8 +130,6 @@ function gameStart(){
     //this makes an instance of ship
     ship = new Playership();
 }
-
-
 
 //event listeners
 document.addEventListener("keydown", keypressdown);
@@ -163,8 +153,8 @@ function keypressup(e){
     
 }
 
-function keypressdown(e){
-   //console.log("key pressed " + e.keyCode)
+function keypressdown(e){//console.log("key pressed " + e.keyCode)
+   
     if(gameOver == false){
         if(e.keyCode === 38){
             ship.up = true
@@ -200,7 +190,6 @@ function keypressdown(e){
     }
 }
 
-
 //gameStates state mech
 gameStates[0] = function(){
 ctx.drawImage(bgMain ,0,0, c.width, c.height);
@@ -216,7 +205,7 @@ ctx.restore();
 
 gameStates[1] = function(){
         
-    //draws score to screen/HUD
+    //draws score HUD
     ctx.save();
     ctx.font = "15px Arial";
     ctx.fillStyle ='white';
@@ -252,26 +241,15 @@ gameStates[1] = function(){
         var dy = ship.y - asteroids[i].y;
         var dist = Math.sqrt((dx*dx)+(dy*dy));
 
-        //check for collition boundries
-       // if(dist < ship.h/2 + asteroids[i].radius){
-            //console.log("colliding with asteroid " + i);
-        //}
-
         if(detectCollision(dist,(ship.h + asteroids[i].radius))){
            // console.log("colliding with asteroid " + i);
             gameOver = true;
             currentState = 2;
-            //document.removeEventListener("keydown", keypressdown);
-            //document.removeEventListener("keyup", keypressup);
         }
 
-
-
-        //recycles asteroids
         if(asteroids[i].y > c.height + asteroids[i].radius){
             asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius)- c.height;
             asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius);
-
         }
 
         if(gameOver == false){
@@ -295,7 +273,6 @@ gameStates[1] = function(){
 }
 
 gameStates[2] = function(){
-
     if(score > highScore){
         highScore = score;
         ctx.save();
@@ -323,14 +300,10 @@ gameStates[2] = function(){
     }
 
 }    
-    
 
 function main(){
     ctx.clearRect(0,0,c.width,c.height);
-
     // Game code was here
-
-   
     if(gameOver == false){
     timer = requestAnimationFrame(main);
     } 
@@ -354,5 +327,3 @@ function scoreTimer(){
         setTimeout(scoreTimer, 1000);
     }
 }
-
-//scoreTimer();
