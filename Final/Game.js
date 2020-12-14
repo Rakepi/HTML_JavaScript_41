@@ -1,3 +1,8 @@
+
+//need help getting gravity swapped from vertical to horizontal
+//getting the ship to be drawn properly
+
+
 var c = document.querySelector('canvas')
 var ctx = c.getContext('2d')
 var timer = requestAnimationFrame(main)
@@ -12,15 +17,19 @@ var highScore = 0;
 
 var BG = new Image();
 var astSprite = new Image();
-var Sprite = new Image();
+var ShipSprite = new Image();
 BG.src = "images/BG$.jpg";
 astSprite.src = "images/asteroid sprite.png";
-//astSprite.src = "images/Sprite.png";
+ShipSprite.src = "images/Ship.png";
+
 
 BG.onload = function(){
     main();
 }
 astSprite.onload = function(){
+    main();
+}
+ShipSprite.onload = function(){
     main();
 }
 
@@ -34,10 +43,10 @@ function randomRange(high, low){
 
 function Asteroids(){
     this.radius = randomRange(15,2)
-    this.x = randomRange(0 + this.radius, c.width - this.radius);
-    this.y = randomRange(0 + this.radius, c.width - this.radius)- c.height;
+    this.x = randomRange(0 + this.radius, c.height - this.radius) + c.width;
+    this.y = randomRange(0 + this.radius, c.width - this.radius);//- c.height;
     this.vx = randomRange(-5,-10);
-    this.vy = randomRange(10,5);
+    this.vy = randomRange(-10,-5);
 
     this.draw = function(){
         ctx.save();
@@ -50,8 +59,8 @@ function Asteroids(){
 function Playership(){
     this.x = c.width/2;
     this.y = c.height/2;
-    this.w = 20;
-    this.h = 20;
+    this.w = 50;
+    this.h = 50;
     this.vx = 0;
     this.vy = 0;
     this.up = false;
@@ -62,7 +71,7 @@ function Playership(){
     this.draw = function(){
         ctx.save();
         ctx.translate(this.x, this.y);
-        //flames for bottom of ship
+        //flames for bottom of ship-----------------------------------
         if(this.up == true){
             ctx.save();
             if(this.flamelength == 30){
@@ -79,20 +88,22 @@ function Playership(){
             ctx.lineTo(0, this.flamelength);
             ctx.closePath()
             ctx.fill();
+            
             ctx.restore();
         }
 
-        ctx.beginPath();
-        ctx.fillStyle = 'green'
-        ctx.moveTo(0,-10);
-        ctx.lineTo (10,10);
-        ctx.lineTo (-10,10);
-        ctx.lineTo (0,-10);
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
+            ctx.beginPath();
+            ctx.fillStyle = 'green'
+            /*ctx.moveTo(0,-10);
+            ctx.lineTo (10,10);
+            ctx.lineTo (-10,10);
+            ctx.lineTo (0,-10);
+            ctx.closePath();*/
+            ctx.fill();
+            ctx.drawImage(ShipSprite, -this.w/2,-this.h/2,this.w,this.h);
+            ctx.restore();
     }
-//bountries
+//bountries----------------------------------------------------------
     this.move = function(){
         this.x += this.vx;
         this.y += this.vy;
@@ -120,7 +131,7 @@ function Playership(){
     }
      
 }
-//ship place holder instence
+
 function gameStart(){
     for(var i = 0; i<numAsteroids; i++){
         asteroids[i] = new Asteroids();
@@ -132,30 +143,26 @@ document.addEventListener("keydown", keypressdown);
 document.addEventListener("keyup", keypressup);
 
 function keypressup(e){
-    //console.log("key pressed " + e.keyCode)
-
     if(gameOver == false){
         if(e.keyCode === 38){
             ship.up = false
         }
-        if(e.keyCode === 37){
-            ship.left = false
+        if(e.keyCode === 40){
+            ship.down = false
         }
         if(e.keyCode === 39){
             ship.right = false
         }
     }
-    
 }
 
-function keypressdown(e){//console.log("key pressed " + e.keyCode)
-   
+function keypressdown(e){
     if(gameOver == false){
         if(e.keyCode === 38){
             ship.up = true
         }
-        if(e.keyCode === 37){
-            ship.left = true
+        if(e.keyCode === 40){
+            ship.down = true
         }
         if(e.keyCode === 39){
             ship.right = true
@@ -184,7 +191,7 @@ function keypressdown(e){//console.log("key pressed " + e.keyCode)
     }
 }
 
-//gameStates state mech
+//gameStates--------------------------------------------------------
 gameStates[0] = function(){
 ctx.drawImage(BG ,0,0, c.width, c.height);
 ctx.save();
@@ -198,64 +205,62 @@ ctx.restore();
 }
 
 gameStates[1] = function(){
-        
-    //draws score HUD
+    //Score HUD-------------------------------------------------------
     ctx.save();
     ctx.font = "15px Arial";
     ctx.fillStyle ='white';
     ctx.fillText("Score: " + score.toString(), c.width - 150 , 30);
     ctx.restore();
-    //ship.vy += gravity;
-
-    //key presses move ship
+    //key presses move ship-------------------------------------------
+    if(ship.right == true){
+       ship.vx = 6;
+    }
+    else{
+        ship.vx = -3;
+    }
     if(ship.up == true){
-       ship.vy = -6;
+       ship.vy = -3
     }
-
+   else if(ship.down == true){
+        ship.vy = 3
+    }
     else{
-        ship.vy = 3;
+        ship.vy = 0
     }
-    
-    if(ship.left == true){
-       ship.vx = -3
-    }
-
-   else if(ship.right == true){
-        ship.vx = 3
-    }
-   
-    else{
-        ship.vx = 0
-    }
-
-        //loops asteroids
+        //for loop-- asteroids
     for(var i = 0; i<asteroids.length; i++){
-        //collition math
+        //collition-------------------------------------------
         var dx = ship.x - asteroids[i].x;
         var dy = ship.y - asteroids[i].y;
         var dist = Math.sqrt((dx*dx)+(dy*dy));
 
-        if(detectCollision(dist,(ship.h + asteroids[i].radius))){
-           // console.log("colliding with asteroid " + i);
+        if(detectCollision(dist,(ship.h/2 + asteroids[i].radius))){
             gameOver = true;
             currentState = 2;
         }
 
-        if(asteroids[i].y > c.height + asteroids[i].radius){
+       /* if(asteroids[i].y > c.height + asteroids[i].radius){
             asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius)- c.height;
             asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius);
+        }*/
+
+        if(asteroids[i].x < 0 - asteroids[i].radius){
+            asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius);//- c.height;
+            asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius)+ c.width;
         }
 
         if(gameOver == false){
-            asteroids[i].y += asteroids[i].vy;
+           // asteroids[i].y += asteroids[i].vy;
+            asteroids[i].x += asteroids[i].vx;
         }
 
        
         asteroids[i].draw();
 
     }
-
+    // ship draw---------------------------------------------------
     ship.draw();
+
     if(gameOver == false){
     ship.move();
     }
@@ -294,10 +299,9 @@ gameStates[2] = function(){
     }
 
 }    
-
+//Main Functions------------------------------------------------------
 function main(){
     ctx.clearRect(0,0,c.width,c.height);
-    // Game code was here
     if(gameOver == false){
     timer = requestAnimationFrame(main);
     } 
@@ -311,13 +315,13 @@ function detectCollision(distance, calcDistance){
 function scoreTimer(){
     if(gameOver == false){
         score++;
-        //using modulus divide score by 5. if remainder is 0 add asteroids
+        //modulus
         if(score % 5 == 0){
             numAsteroids += 3;
             console.log(numAsteroids);
 
         }
-        //console.log(score);
+
         setTimeout(scoreTimer, 1000);
     }
 }
