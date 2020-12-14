@@ -55,7 +55,7 @@ function Asteroids(){
     }
 
 }
-
+//Ship class ---------------------------------------------------------
 function Playership(){
     this.x = c.width/2;
     this.y = c.height/2;
@@ -91,7 +91,7 @@ function Playership(){
             
             ctx.restore();
         }
-
+            //Ship--------------------------------------------------------
             ctx.beginPath();
             ctx.fillStyle = 'green'
             /*ctx.moveTo(0,-10);
