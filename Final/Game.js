@@ -1,8 +1,3 @@
-
-//need help getting gravity swapped from vertical to horizontal
-//getting the ship to be drawn properly
-
-
 var c = document.querySelector('canvas')
 var ctx = c.getContext('2d')
 var timer = requestAnimationFrame(main)
@@ -18,9 +13,11 @@ var highScore = 0;
 var BG = new Image();
 var astSprite = new Image();
 var ShipSprite = new Image();
+var Table = new Image();
 BG.src = "images/BG$.jpg";
 astSprite.src = "images/asteroid sprite.png";
 ShipSprite.src = "images/Ship.png";
+Table.src = "images/Table.jpg"
 
 
 BG.onload = function(){
@@ -94,11 +91,6 @@ function Playership(){
             //Ship--------------------------------------------------------
             ctx.beginPath();
             ctx.fillStyle = 'green'
-            /*ctx.moveTo(0,-10);
-            ctx.lineTo (10,10);
-            ctx.lineTo (-10,10);
-            ctx.lineTo (0,-10);
-            ctx.closePath();*/
             ctx.fill();
             ctx.drawImage(ShipSprite, -this.w/2,-this.h/2,this.w,this.h);
             ctx.restore();
@@ -239,18 +231,12 @@ gameStates[1] = function(){
             currentState = 2;
         }
 
-       /* if(asteroids[i].y > c.height + asteroids[i].radius){
-            asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius)- c.height;
-            asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius);
-        }*/
-
         if(asteroids[i].x < 0 - asteroids[i].radius){
             asteroids[i].y = randomRange(c.height - asteroids[i].radius ,asteroids[i].radius);//- c.height;
             asteroids[i].x = randomRange(c.width + asteroids[i].radius ,asteroids[i].radius)+ c.width;
         }
 
         if(gameOver == false){
-           // asteroids[i].y += asteroids[i].vy;
             asteroids[i].x += asteroids[i].vx;
         }
 
@@ -274,6 +260,7 @@ gameStates[1] = function(){
 gameStates[2] = function(){
     if(score > highScore){
         highScore = score;
+        ctx.drawImage(Table ,0,0, c.width, c.height);
         ctx.save();
         ctx.font = "30px Arial";
         ctx.fillStyle = "white";
