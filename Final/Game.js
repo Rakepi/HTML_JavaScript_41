@@ -19,6 +19,9 @@ astSprite.src = "images/asteroid sprite.png";
 ShipSprite.src = "images/Ship.png";
 Table.src = "images/Table.jpg"
 
+Table.onload = function(){
+    main();
+}
 
 BG.onload = function(){
     main();
