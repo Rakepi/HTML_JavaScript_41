@@ -19,6 +19,12 @@ h1{
 
 }
 
-/*#container{
+footer{
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}
+
+#container{
     background-color: black;
 }
