@@ -22,7 +22,6 @@ Table.src = "images/Table.jpg"
 Table.onload = function(){
     main();
 }
-
 BG.onload = function(){
     main();
 }
